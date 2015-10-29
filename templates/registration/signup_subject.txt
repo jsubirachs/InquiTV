@@ -1,0 +1,1 @@
+[ {{ user.username }}, welcome to {{ site_name }} ]

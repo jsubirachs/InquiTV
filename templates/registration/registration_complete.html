@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% if sended %}
+<h1>Registration Email sent</h1>
+<p>We've emailed you for account activation. You should receive them shortly.</p>
+<p>If you don't receive an email, please check your spam folder.</p>
+{% else %}
+<h1>Registration FAILED!</h1>
+<p>We've problems sending email for account activation.</p>
+<p>Please, try to signup again or contact with the admin.</p>
+<p>Sorry for the inconvenience.</p>
+{% endif %}
+{% endblock %}

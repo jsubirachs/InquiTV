@@ -1,0 +1,129 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="{% static "logos/dog.png" %}" width="52px" height="52px"> -->
+
+    <!-- Inicio configuracion favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'logos/favicons/apple-touch-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'logos/favicons/apple-touch-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'logos/favicons/apple-touch-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'logos/favicons/apple-touch-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'logos/favicons/apple-touch-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'logos/favicons/apple-touch-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'logos/favicons/apple-touch-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'logos/favicons/apple-touch-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'logos/favicons/apple-touch-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'logos/favicons/favicon-32x32.png' %}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{% static 'logos/favicons/android-chrome-192x192.png' %}" sizes="192x192">
+    <link rel="icon" type="image/png" href="{% static 'logos/favicons/favicon-96x96.png' %}" sizes="96x96">
+    <link rel="icon" type="image/png" href="{% static 'logos/favicons/favicon-16x16.png' %}" sizes="16x16">
+    <link rel="manifest" href="{% static 'logos/favicons/manifest.json' %}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="{% static 'logos/favicons/mstile-144x144.png' %}">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Fin configuracion favicon -->
+
+    <title>InquiTV</title>
+
+    <!-- <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet"> -->
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/dashboard.css" %}" rel="stylesheet">    
+
+    <link href="{% static "css/inquitv.css" %}" rel="stylesheet">
+
+
+    {% block head %}
+    {% endblock %}
+    
+  </head>
+
+  <body>
+    
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'index' %}">Inqui<img src="{% static "logos/tv.png" %}" width="20px" height="20px"/></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                      {% if user.is_admin %}
+		        <li><a href="/admin/" style="color:red"><strong>Admin</strong></a></li>
+		        <li><a href="/subscription/">Subscription</a></li>
+		      {% else %}
+			{% if user.profile.free_access or free %}
+			{% else %}
+		          {% if days > 0 %}
+		            <li><a style="color:#337AB7">
+			      {% if days > 1 %}
+			        (<strong>{{ days }}</strong> days of subscription)</a></li>
+		              {% else %}
+		                (<strong>{{ days }}</strong> day of subscription)</a></li>
+                              {% endif %}
+		          {% else %}
+		            <li><a href="{% url 'subscription' %}" style="color:red"><strong>Buy Subscription!</strong></a></li>
+		          {% endif %}
+		        {% endif %}
+		      {% endif %}
+
+
+		      <li><a href="{% url 'contact_login' %}">Contact</a></li>
+
+
+			<li><div class="dropdown">
+			  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ user.username }}
+			  <span class="caret"></span></button>
+			  <ul class="dropdown-menu">
+			    <li><a href="{% url 'password_change' %}">Password Change</a></li>
+			    <li><a href="{% url 'email_change' %}">Email Change</a></li>
+			    <li><a href="{% url 'delete_account' %}">Delete Account</a></li>
+			  </ul>
+			</div></li>
+
+
+
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+		    {% else %}
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+		    {% endif %}
+
+
+              </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <!-- <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script> -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <!-- <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <script src="{% static "js/ie10-viewport-bug-workaround.js" %}"></script>
+
+    <div class="div-marco-1">
+      <div class="div-marco-2">
+	{% block body %}
+        {% endblock %}
+      </div>      
+    </div>
+
+  </body>
+
+  
+</html>

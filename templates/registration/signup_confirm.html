@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+
+{% if validlink %}
+<h1>Account activated!</h1>
+<h3>Dear {{ username }}, welcome to our website!</h3>
+<p>Your user has been activated.  You may go ahead and log in now.</p>
+<p><a href="{% url 'index' %}">Login</a></p>
+
+{% else %}
+<h1>Account unsuccessful activated</h1>
+<p>The signup link was invalid, <br />
+possibly because it has already been used <br />
+or link was deprecated. <br />
+Please signup again or contact with administrator.</p>
+{% endif %}
+
+{% endblock %}

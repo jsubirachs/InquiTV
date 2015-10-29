@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <script type="text/javascript" src="{% static "bitdash.min.js" %}"></script>
+{% endblock %}
+
+{% block body %}
+    
+   <div id="player"></div>
+   <script type="text/javascript">
+       var conf = {
+           key:       "",
+           source:    {
+               mpd:       "http://127.0.0.1/live/dash/movie.mpd",
+               hls:       "http://127.0.0.1/live/hls/movie.m3u8"            
+           },
+           playback: {
+               autoplay:  true
+           }
+       };
+       var player = bitdash("player").setup(conf);
+   </script>
+   
+
+{% endblock %}

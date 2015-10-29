@@ -1,0 +1,50 @@
+
+.div-marco-1 {
+    border: 1px solid black;
+    border-radius: 50px;
+    margin: 50px 50px 50px 50px;
+}
+
+.div-marco-2 {
+    margin: 30px 30px 30px 30px;
+    text-align: center;
+}
+
+#player {
+    display: table;
+    margin: auto;
+}
+
+.div-marco-2 h1 {
+    margin: 0 0 30px 0;
+}
+
+.div-marco-2 table {
+    margin: 0 auto; 
+    text-align: left;
+    border-collapse: separate;
+    border-spacing: 10px 10px;
+}
+
+.div-marco-2 input[type="submit"] {
+    margin: 20px 0 0 0;
+}
+
+.text-left {
+    text-align: left;
+}
+
+/* CSS for subscription page */
+.input-hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+input[type="radio"]:checked + label>img {
+    border: 1px solid #fff;
+    box-shadow: 0 0 3px 10px red;
+}
+
+input[type="radio"] + label>img {
+    margin: 0 10px 0 10px;
+}

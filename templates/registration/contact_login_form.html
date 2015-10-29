@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% if email_fail %}
+<h1>Email FAIL!</h1>
+<p>The email sended fail!</p>
+<p>Please try again and if fail, wait a few minutes/hours and try again.</p>
+{% elif done %}
+<h1>Email Sent!</h1>
+<p>Your email was sent to admin.</p>
+<p>We will respond you as soon as possible.</p>
+{% else %}
+<h1>Contact with admin</h1>
+<p>Send email to admin for any question or problem:</p>
+
+<p><strong>User:</strong> {{ user.username }}</p>
+<p><strong>Email to respond:</strong> {{ user.email }}</p>
+
+<form method="post" action=".">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+
+
+  <input type="submit" value="Send Email" />
+</form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+  
+{% block body %}
+<h1>SUBSCRIPTION</h1>
+<h2>{{ config.V6_SUBSCRIPTION_DAYS  }} days Only {{ config.V4_PRICE|floatformat:-2 }} {{ config.V5_CURRENCY }} !!</h2>
+<div class="text-left">
+<h3>Instructions (English):</h3>
+<ol>
+  <li>Click the image below of a payment method that you have an account.</li>
+  <li>Login and send the exact money (<strong style="color:blue;">{{ config.V4_PRICE|floatformat:-2 }} {{ config.V5_CURRENCY }}</strong>)  to the email:<strong style="color:red;"><h4>{{ config.V2_EMAIL_PAYMENT_USER }}</h4></strong><strong> WITH YOUR USERNAME ( <strong style="color:green;">{{ user.username }}</strong> ) AS A MESSAGE</strong></li>
+  <li>When you receive the confirmation email in your email address associated with your payment account, click "Check Payment" button.</li>
+</ol>
+<p>*If you don't have any account with this websites, you can pay with credit card in any of this sites.</p>  
+<p>*For any problem use contact form and we will resolve as soon as possible.</p>
+</div>
+<br/>
+<div class="text-left">
+<h3>Instrucciones (Español):</h3>
+<ol>
+  <li>Haz clic a una de las imágenes de abajo con la que tengas una cuenta con ese método de pago.</li>
+  <li>Loguéate y envía el dinero exacto (<strong style="color:blue;">{{ config.V4_PRICE|floatformat:-2 }} {{ config.V5_CURRENCY }}</strong>)  al correo:<strong style="color:red;"><h4>{{ config.V2_EMAIL_PAYMENT_USER }}</h4></strong><strong> CON TU NOMBRE DE USUARIO ( <strong style="color:green;">{{ user.username }}</strong> ) COMO MENSAJE</strong></li>
+  <li>Cuando recibas el email de confirmación del pago en tu cuenta de email asociada con el método de pago usado, haz clic en el botón "Check Payment".</li>
+</ol>
+<p>*Si no tienes ninguna cuenta en estas webs de pago, puedes pagar con tarjeta desde cualquiera de ellas.</p>  
+<p>*Para cualquier problema usa el formulario de contacto e intentaremos resolverlo lo antes posible.</p>
+</div>
+<hr>
+<br/>
+<form method="post" action=".">
+  {% csrf_token %}
+
+  <input type="radio" name="method" id="paypal" class="input-hidden" value="paypal" onclick="window.open('http://www.paypal.com','_blank')"/>
+  <label for="paypal">
+    <img src="{% static "logos/paypal.jpg" %}" width="200px" height="70px" alt="PayPal"/>
+  </label>
+
+  <input type="radio" name="method" id="neteller" class="input-hidden" value="neteller" onclick="window.open('http://www.neteller.com','_blank')"/>
+  <label for="neteller">
+    <img src="{% static "logos/neteller.jpg" %}" width="200px" height="70px" alt="Neteller"/>
+  </label>
+
+  <input type="radio" name="method" id="skrill" class="input-hidden" value="skrill" onclick="window.open('http://www.skrill.com','_blank')"/>
+  <label for="skrill">
+    <img src="{% static "logos/skrill.jpg" %}" alt="Skrill"/>
+  </label>
+
+  <br/>
+  <br/>
+  <br/>
+  <input type="submit" value="Check Payment" disabled="disabled"/>
+
+  <script type="text/javascript">
+    $(function(){
+      $("input[type='radio']").change(function(){
+        $("input[type='submit']").prop("disabled", false);
+      });
+    });
+  </script>
+  
+  {% if messages %}
+  <div>
+  {% for message in messages %}
+    <div class="alert">
+      <strong style="color:red;">{{ message|safe }}</strong>
+    </div>
+  {% endfor %}
+  </div>
+  {% endif %}
+
+</form>
+
+
+{% endblock %}

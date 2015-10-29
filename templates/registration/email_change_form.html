@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% if done %}
+<h1>Email Changed!</h1>
+<p>Your new email is: <strong>{{ user.email }}</strong></p>
+{% else %}
+<h1>Email Change</h1>
+<form method="post" action=".">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+
+  <input type="submit" value="Submit" />
+</form>
+{% endif %}
+{% endblock %}

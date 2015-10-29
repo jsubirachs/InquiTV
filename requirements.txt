@@ -1,0 +1,17 @@
+beautifulsoup4==4.4.1
+Django==1.8.2
+
+#Hay un fork que usa la cache y dice ser mas rapido en el login, pero de momento solo usa redis no memcached (django-defender).
+#django-axes necesita pytz para el admin
+django-axes==1.5.0
+pytz==2015.6
+
+#el paquete es django-constance[database] pero tenia un fallo y no lo corrigieron en el git oficial, este es un fork puesto en pypi, incluye django-picklefield==0.3.1
+django-picklefield==0.3.1
+django-constance-updated==1.0.1
+
+django-decorator-include==0.2
+django-simple-captcha==0.4.5
+Pillow==2.8.2
+python-memcached==1.57
+six==1.9.0

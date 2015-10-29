@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>Login</h1>
+<form method="post" action="{% url 'index' %}">
+  {% csrf_token %}
+  <table>
+  {{ form.as_table }}
+  </table>
+
+  <input type="submit" value="login" />
+  <input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+<p>Not a member? <a href="{% url 'signup' %}">Register!</a><br />
+Forgot password? <a href="{% url 'password_reset' %}">Reset!</a></p>
+{% endblock %}

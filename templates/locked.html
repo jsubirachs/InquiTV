@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block body %}
+
+  <h1>Account locked</h1>
+
+  <p>Too many login attempts ({{ failure_limit }}). Contact an admin to unlock your account or wait {{ cooloff_time }}.</p>
+
+{% endblock %}
